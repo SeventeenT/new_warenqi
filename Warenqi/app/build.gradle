@@ -6,7 +6,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.digg.warenqiseller"
+        applicationId "com.juying.warenqi"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -20,10 +20,10 @@ android {
     }
 
     productFlavors {
-        warenqi_seller {
-            manifestPlaceholders = [UMENG_CHANNEL       : "warenqi_seller",
-                                    UMENG_APPKEY        : "5938e0d445297d4b38000a3c",
-                                    UMENG_MESSAGE_SECRET: "34c3e1c8a3761f4d91f03f400e8f3552",]
+        warenqi {
+            manifestPlaceholders = [UMENG_CHANNEL       : "warenqi",
+                                    UMENG_APPKEY        : "5748194167e58e639c002c87",
+                                    UMENG_MESSAGE_SECRET: "112e1311c4d3602befda6834a6d83616",]
         }
     }
 
@@ -60,6 +60,7 @@ dependencies {
     compile rootProject.ext.dependencies["rxbinding"]
     compile rootProject.ext.dependencies["rxbinding-design"]
     compile rootProject.ext.dependencies["FlycoTabLayout"]
+    compile rootProject.ext.dependencies["banner"]
     //arms
     compile 'me.jessyan:arms:2.1.0'
     //test

@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/grey_ddd</item>
+        <item name="colorControlActivated">@android:color/darker_gray</item>
+    </style>
+
 </resources>

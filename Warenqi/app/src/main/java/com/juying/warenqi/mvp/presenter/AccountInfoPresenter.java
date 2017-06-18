@@ -6,7 +6,7 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
-import com.juying.warenqi.mvp.contract.MainContract;
+import com.juying.warenqi.mvp.contract.AccountInfoContract;
 
 import javax.inject.Inject;
 
@@ -14,14 +14,14 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 
 @ActivityScope
-public class MainPresenter extends BasePresenter<MainContract.Model, MainContract.View> {
+public class AccountInfoPresenter extends BasePresenter<AccountInfoContract.Model, AccountInfoContract.View> {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
 
     @Inject
-    public MainPresenter(MainContract.Model model, MainContract.View rootView
+    public AccountInfoPresenter(AccountInfoContract.Model model, AccountInfoContract.View rootView
             , RxErrorHandler handler, Application application
             , ImageLoader imageLoader, AppManager appManager) {
         super(model, rootView);

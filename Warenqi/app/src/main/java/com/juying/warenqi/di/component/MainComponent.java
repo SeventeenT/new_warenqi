@@ -1,9 +1,9 @@
 package com.juying.warenqi.di.component;
 
-import com.digg.warenqiseller.di.module.MainModule;
-import com.digg.warenqiseller.mvp.ui.activity.MainActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.di.scope.ActivityScope;
+import com.juying.warenqi.di.module.MainModule;
+import com.juying.warenqi.mvp.ui.activity.MainActivity;
 
 import dagger.Component;
 

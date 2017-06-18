@@ -1,20 +1,26 @@
-package com.digg.warenqiseller.mvp.presenter;
+package com.juying.warenqi.mvp.presenter;
 
 import android.app.Application;
+import android.content.Intent;
 
-import com.digg.warenqiseller.mvp.contract.LoginContract;
-import com.digg.warenqiseller.mvp.model.entity.BaseBean;
-import com.digg.warenqiseller.utils.RxUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
+import com.juying.warenqi.mvp.contract.LoginContract;
+import com.juying.warenqi.mvp.model.entity.AccountInfo;
+import com.juying.warenqi.mvp.model.entity.BaseBean;
+import com.juying.warenqi.mvp.ui.activity.MainActivity;
+import com.juying.warenqi.utils.RxUtils;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 
 @ActivityScope
@@ -39,12 +45,26 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
         mModel.login(username, password)
                 .compose(RxUtils.applySchedulers(mRootView))
                 .compose(RxUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseBean<String>>(mErrorHandler) {
+                .flatMap(new Function<BaseBean<AccountInfo>, ObservableSource<AccountInfo>>() {
                     @Override
-                    public void onNext(@NonNull BaseBean<String> stringBaseBean) {
-//                        mRootView.showMessage(stringBaseBean.toString());
+                    public ObservableSource<AccountInfo> apply(@NonNull BaseBean<AccountInfo> infoBaseBean) throws Exception {
+                        return Observable.just(infoBaseBean.getResults());
                     }
+                })
+                .subscribe(accountInfo -> {
+                    mRootView.showMessage("登录成功");
+                    saveAccountInfo(accountInfo);
+                    Intent intent = new Intent();
+                    intent.setClass(mApplication, MainActivity.class);
+                    mRootView.launchActivity(intent);
                 });
+    }
+
+    private void saveAccountInfo(AccountInfo accountInfo) {
+        SPUtils sp = SPUtils.getInstance();
+        sp.put("isLogin", true);
+        sp.put("userId", accountInfo.getId());
+        sp.put("nick", accountInfo.getNick());
     }
 
     @Override

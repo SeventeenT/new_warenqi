@@ -1,6 +1,7 @@
 package com.juying.warenqi.mvp.model.api.service;
 
 
+import com.juying.warenqi.mvp.model.entity.AccountInfo;
 import com.juying.warenqi.mvp.model.entity.BaseBean;
 
 import io.reactivex.Observable;
@@ -18,7 +19,7 @@ import retrofit2.http.POST;
 public interface LoginService {
 
     @FormUrlEncoded
-    @POST("/app/login")
-    Observable<BaseBean<String>> login(@Field("nick") String username, @Field("pass") String password);
+    @POST("app/login")
+    Observable<BaseBean<AccountInfo>> login(@Field("nick") String username, @Field("pass") String password);
 
 }

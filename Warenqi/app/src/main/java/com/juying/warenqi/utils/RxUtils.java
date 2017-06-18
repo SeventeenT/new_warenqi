@@ -1,4 +1,4 @@
-package com.digg.warenqiseller.utils;
+package com.juying.warenqi.utils;
 
 import com.jess.arms.mvp.IView;
 import com.trello.rxlifecycle2.LifecycleTransformer;

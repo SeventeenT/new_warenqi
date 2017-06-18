@@ -179,7 +179,7 @@ public class GlobalConfiguration implements ConfigModule {
                 if (BuildConfig.DEBUG) {//Logger日志打印
                     Timber.plant(new Timber.DebugTree());
                     Logger.addLogAdapter(new AndroidLogAdapter(PrettyFormatStrategy.newBuilder()
-                            .tag("WarenqiSeller").build()));
+                            .tag("Warenqi-New").build()));
                 }
                 //leakCanary内存泄露检查
                 ((App) application).getAppComponent().extras().put(RefWatcher.class.getName(),
@@ -292,7 +292,7 @@ public class GlobalConfiguration implements ConfigModule {
 
             @Override
             public void onFragmentDestroyed(FragmentManager fm, Fragment f) {
-                ((RefWatcher) ((App) f.getActivity().getApplication()).getAppComponent().extras().get(RefWatcher.class.getName())).watch(this);
+                ((RefWatcher) ((App) f.getActivity().getApplication()).getAppComponent().extras().get(RefWatcher.class.getName())).watch(f);
             }
         });
     }
