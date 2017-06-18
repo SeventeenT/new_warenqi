@@ -1,4 +1,4 @@
-package com.digg.warenqiseller.mvp.model.api;
+package com.juying.warenqi.mvp.model.api;
 
 public interface Api {
     String APP_DOMAIN = "http://121.201.29.42:9005";

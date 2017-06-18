@@ -1,8 +1,8 @@
-package com.digg.warenqiseller.di.module;
+package com.juying.warenqi.di.module;
 
-import com.digg.warenqiseller.mvp.contract.MainContract;
-import com.digg.warenqiseller.mvp.model.MainModel;
 import com.jess.arms.di.scope.ActivityScope;
+import com.juying.warenqi.mvp.contract.MainContract;
+import com.juying.warenqi.mvp.model.MainModel;
 
 import dagger.Module;
 import dagger.Provides;

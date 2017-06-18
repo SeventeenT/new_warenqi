@@ -1,4 +1,4 @@
-package com.digg.warenqiseller.mvp.model.api.cache;
+package com.juying.warenqi.mvp.model.api.cache;
 
 public interface CommonCache {
 

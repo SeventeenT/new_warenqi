@@ -1,7 +1,7 @@
-package com.digg.warenqiseller.mvp.model.api.service;
+package com.juying.warenqi.mvp.model.api.service;
 
 
-import com.digg.warenqiseller.mvp.model.entity.BaseBean;
+import com.juying.warenqi.mvp.model.entity.BaseBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;

@@ -1,4 +1,4 @@
-package com.digg.warenqiseller.mvp.model.api.service;
+package com.juying.warenqi.mvp.model.api.service;
 
 
 /**

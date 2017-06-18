@@ -1,4 +1,4 @@
-package com.digg.warenqiseller.http;
+package com.juying.warenqi.http;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,6 +1,6 @@
-package com.digg.warenqiseller.mvp.model.entity;
+package com.juying.warenqi.mvp.model.entity;
 
-import com.digg.warenqiseller.mvp.model.api.Api;
+import com.juying.warenqi.mvp.model.api.Api;
 
 import java.io.Serializable;
 

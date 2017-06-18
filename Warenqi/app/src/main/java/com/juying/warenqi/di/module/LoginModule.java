@@ -1,12 +1,11 @@
-package com.digg.warenqiseller.di.module;
+package com.juying.warenqi.di.module;
 
 import com.jess.arms.di.scope.ActivityScope;
+import com.juying.warenqi.mvp.contract.LoginContract;
+import com.juying.warenqi.mvp.model.LoginModel;
 
 import dagger.Module;
 import dagger.Provides;
-
-import com.digg.warenqiseller.mvp.contract.LoginContract;
-import com.digg.warenqiseller.mvp.model.LoginModel;
 
 
 @Module

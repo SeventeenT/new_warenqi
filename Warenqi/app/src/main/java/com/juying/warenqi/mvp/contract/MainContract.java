@@ -1,4 +1,4 @@
-package com.digg.warenqiseller.mvp.contract;
+package com.juying.warenqi.mvp.contract;
 
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;

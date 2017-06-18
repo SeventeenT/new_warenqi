@@ -1,4 +1,4 @@
-package com.digg.warenqiseller.app;
+package com.juying.warenqi.app;
 
 import android.app.Activity;
 import android.app.Application;
@@ -18,15 +18,6 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
-import com.digg.warenqiseller.BuildConfig;
-import com.digg.warenqiseller.R;
-import com.digg.warenqiseller.http.AddCookiesInterceptor;
-import com.digg.warenqiseller.http.ApiException;
-import com.digg.warenqiseller.http.PersistentCookiesInterceptor;
-import com.digg.warenqiseller.mvp.model.api.Api;
-import com.digg.warenqiseller.mvp.model.api.cache.CommonCache;
-import com.digg.warenqiseller.mvp.model.api.service.CommonService;
-import com.digg.warenqiseller.mvp.model.api.service.LoginService;
 import com.google.gson.JsonParseException;
 import com.jess.arms.base.App;
 import com.jess.arms.base.BaseApplication;
@@ -37,6 +28,15 @@ import com.jess.arms.http.RequestInterceptor;
 import com.jess.arms.integration.ConfigModule;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.utils.UiUtils;
+import com.juying.warenqi.BuildConfig;
+import com.juying.warenqi.R;
+import com.juying.warenqi.http.AddCookiesInterceptor;
+import com.juying.warenqi.http.ApiException;
+import com.juying.warenqi.http.PersistentCookiesInterceptor;
+import com.juying.warenqi.mvp.model.api.Api;
+import com.juying.warenqi.mvp.model.api.cache.CommonCache;
+import com.juying.warenqi.mvp.model.api.service.CommonService;
+import com.juying.warenqi.mvp.model.api.service.LoginService;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;

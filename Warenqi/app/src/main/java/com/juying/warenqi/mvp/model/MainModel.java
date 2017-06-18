@@ -1,17 +1,14 @@
-package com.digg.warenqiseller.mvp.model;
+package com.juying.warenqi.mvp.model;
 
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
+import com.juying.warenqi.mvp.contract.MainContract;
 
 import javax.inject.Inject;
-
-import com.digg.warenqiseller.mvp.contract.MainContract;
-
 
 @ActivityScope
 public class MainModel extends BaseModel implements MainContract.Model {

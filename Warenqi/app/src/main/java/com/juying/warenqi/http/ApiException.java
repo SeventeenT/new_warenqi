@@ -1,4 +1,4 @@
-package com.digg.warenqiseller.http;
+package com.juying.warenqi.http;
 
 /**
  * <pre>

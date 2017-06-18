@@ -1,8 +1,8 @@
-package com.digg.warenqiseller.mvp.contract;
+package com.juying.warenqi.mvp.contract;
 
-import com.digg.warenqiseller.mvp.model.entity.BaseBean;
-import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.jess.arms.mvp.IView;
+import com.juying.warenqi.mvp.model.entity.BaseBean;
 
 import io.reactivex.Observable;
 
