@@ -1,0 +1,42 @@
+package com.digg.warenqiseller.mvp.model;
+
+import android.app.Application;
+
+import com.digg.warenqiseller.mvp.contract.LoginContract;
+import com.digg.warenqiseller.mvp.model.api.service.LoginService;
+import com.digg.warenqiseller.mvp.model.entity.BaseBean;
+import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
+import com.jess.arms.integration.IRepositoryManager;
+import com.jess.arms.mvp.BaseModel;
+
+import javax.inject.Inject;
+
+import io.reactivex.Observable;
+
+
+@ActivityScope
+public class LoginModel extends BaseModel implements LoginContract.Model {
+    private Gson mGson;
+    private Application mApplication;
+
+    @Inject
+    public LoginModel(IRepositoryManager repositoryManager, Gson gson, Application application) {
+        super(repositoryManager);
+        this.mGson = gson;
+        this.mApplication = application;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.mGson = null;
+        this.mApplication = null;
+    }
+
+    @Override
+    public Observable<BaseBean<String>> login(String username, String password) {
+        return mRepositoryManager.obtainRetrofitService(LoginService.class).login(username, password);
+    }
+
+}

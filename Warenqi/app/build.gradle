@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "com.digg.warenqiseller"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        buildConfigField "String", "SECRET", '"Ko;l47q6P`KZo:=xTc]39CJ`JPwGJ=fss8n:MaxR[YjPVN/2DI6`>5g3KdfMKpS9"'
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+        warenqi_seller {
+            manifestPlaceholders = [UMENG_CHANNEL       : "warenqi_seller",
+                                    UMENG_APPKEY        : "5938e0d445297d4b38000a3c",
+                                    UMENG_MESSAGE_SECRET: "34c3e1c8a3761f4d91f03f400e8f3552",]
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //tools
+    provided rootProject.ext.dependencies["javax.annotation"]
+    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+    compile rootProject.ext.dependencies["utils"]
+    compile rootProject.ext.dependencies["umeng-analytics"]
+    compile project(':PushSDK')
+    //view
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    compile rootProject.ext.dependencies["refresh-layout"]
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    compile rootProject.ext.dependencies["support-v4"]
+    compile rootProject.ext.dependencies["design"]
+    compile rootProject.ext.dependencies["recyclerview-v7"]
+    compile rootProject.ext.dependencies["rxbinding"]
+    compile rootProject.ext.dependencies["rxbinding-design"]
+    compile rootProject.ext.dependencies["FlycoTabLayout"]
+    //arms
+    compile 'me.jessyan:arms:2.1.0'
+    //test
+    compile rootProject.ext.dependencies["logger"]
+    debugCompile rootProject.ext.dependencies["canary-debug"]
+    releaseCompile rootProject.ext.dependencies["canary-release"]
+    testCompile rootProject.ext.dependencies["canary-release"]
+}
