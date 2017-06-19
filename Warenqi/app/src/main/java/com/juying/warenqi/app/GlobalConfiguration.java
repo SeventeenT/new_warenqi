@@ -37,6 +37,7 @@ import com.juying.warenqi.mvp.model.api.Api;
 import com.juying.warenqi.mvp.model.api.cache.CommonCache;
 import com.juying.warenqi.mvp.model.api.service.CommonService;
 import com.juying.warenqi.mvp.model.api.service.LoginService;
+import com.juying.warenqi.mvp.model.api.service.MainService;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
@@ -165,7 +166,7 @@ public class GlobalConfiguration implements ConfigModule {
 
     @Override
     public void registerComponents(Context context, IRepositoryManager repositoryManager) {
-        repositoryManager.injectRetrofitService(CommonService.class, LoginService.class);
+        repositoryManager.injectRetrofitService(CommonService.class, LoginService.class, MainService.class);
         repositoryManager.injectCacheService(CommonCache.class);
     }
 

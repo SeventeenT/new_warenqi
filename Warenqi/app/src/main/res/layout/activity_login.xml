@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="538px"
+    android:layout_width="269dp"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center_horizontal"
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="92px"
         android:layout_marginTop="100px"
-        android:hint="输入用户名/手机号码"
+        android:hint="@string/input_username_hint"
         android:textColor="@color/grey_333"
         android:gravity="bottom"
         android:theme="@style/MyEditText"
@@ -28,7 +28,7 @@
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="140px"
-        android:hint="输入密码"
+        android:hint="@string/input_password"
         android:gravity="bottom"
         android:inputType="textPassword"
         android:theme="@style/MyEditText"
@@ -46,7 +46,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/blue_4680fe"
-            android:text="联系客服" />
+            android:text="@string/contact_service" />
 
         <TextView
             android:id="@+id/btn_forget_password"
@@ -54,7 +54,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:gravity="center"
-            android:text="忘记密码？" />
+            android:text="@string/forget_password" />
     </RelativeLayout>
 
     <View
@@ -65,12 +65,12 @@
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:background="@drawable/shape_blue_4dp_radius_btn"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:enabled="false"
-        android:text="登录" />
+        android:text="@string/login" />
 
     <TextView
         android:id="@+id/btn_register"
@@ -80,6 +80,6 @@
         android:textColor="@color/blue_4680fe"
         android:layout_marginBottom="90px"
         android:layout_marginTop="56px"
-        android:text="立即注册" />
+        android:text="@string/register" />
 
 </com.zhy.autolayout.AutoLinearLayout>

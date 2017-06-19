@@ -28,7 +28,9 @@ public class AccountInfo {
     private long modifyTime;
     private String nick;
     private String password;
+    private String payPassword;
     private String promoCodes;
+    private String headPic;
     private String qq;
     private long registTime;
     private int rewardCount;
@@ -42,6 +44,22 @@ public class AccountInfo {
     private String type;
     private int userCount;
     private String vipStatus;
+
+    public String getPayPassword() {
+        return payPassword;
+    }
+
+    public void setPayPassword(String payPassword) {
+        this.payPassword = payPassword;
+    }
+
+    public String getHeadPic() {
+        return headPic;
+    }
+
+    public void setHeadPic(String headPic) {
+        this.headPic = headPic;
+    }
 
     public String getActiveCode() {
         return activeCode;

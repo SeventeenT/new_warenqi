@@ -23,6 +23,8 @@ import com.juying.warenqi.app.TabEntity;
 import com.juying.warenqi.di.component.DaggerMainComponent;
 import com.juying.warenqi.di.module.MainModule;
 import com.juying.warenqi.mvp.contract.MainContract;
+import com.juying.warenqi.mvp.model.entity.TakeTask;
+import com.juying.warenqi.mvp.model.entity.TaskCount;
 import com.juying.warenqi.mvp.presenter.MainPresenter;
 import com.juying.warenqi.mvp.ui.fragment.AccountInfoFragment;
 import com.juying.warenqi.mvp.ui.fragment.HomeFragment;
@@ -62,6 +64,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private List<String> mTitles;
     private List<Fragment> mFragments;
     private int mCurrentPos = 0;
+    private boolean hasTakenTasks;
+    private boolean hasTask;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -80,6 +84,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        mPresenter.getTaskInfo();
+        mPresenter.getTaskCount();
         toolbarBack.setVisibility(View.GONE);
         toolbar.setVisibility(View.GONE);
         for (int i = 0; i < mTabTitles.length; i++) {
@@ -176,6 +182,20 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 toolbar.setVisibility(View.VISIBLE);
                 toolbarTitle.setText(title);
             }
+//            if (tabMain.getMsgView(position) != null) {
+//                tabMain.hideMsg(position);
+//            }
+            if (hasTask && position != 1) {
+                tabMain.showDot(1);
+            } else if (position == 1) {
+                tabMain.hideMsg(1);
+            }
+
+            if (hasTakenTasks && position != 2) {
+                tabMain.showDot(2);
+            } else if (position == 2) {
+                tabMain.hideMsg(2);
+            }
         }
 
         @Override
@@ -193,5 +213,46 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void showMyTaskDot(TakeTask task) {
+        int taskId = task.getTaskId();
+        int sdTaskId = task.getSdTaskId();
+        int daysTaskId = task.getDaysTaskId();
+        boolean isTake = task.isTake();
+        if (taskId > 0) {
+            tabMain.showDot(2);
+        }
+        if (sdTaskId > 0 || daysTaskId > 0) {
+            tabMain.showDot(2);
+        }
+        hasTakenTasks = taskId > 0 || sdTaskId > 0 || daysTaskId > 0;
+//        if (isTake) {
+//            launchActivity();
+//        }
+    }
+
+    @Override
+    public void showTaskCountDot(TaskCount taskCount) {
+        int count = taskCount.getHdCount() +
+                taskCount.getDaysDfCount() +
+                taskCount.getDfCount() +
+                taskCount.getOrderCount() +
+                taskCount.getZtcCount();
+        if (count > 0) {
+            hasTask = true;
+            tabMain.showDot(1);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFragments = null;
+        mTabTitles = null;
+        mTitles = null;
+        mIconSelectedIds = null;
+        mIconUnselectedIds = null;
     }
 }

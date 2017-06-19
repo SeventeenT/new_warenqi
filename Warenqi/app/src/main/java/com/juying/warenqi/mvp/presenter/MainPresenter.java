@@ -7,10 +7,16 @@ import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
 import com.juying.warenqi.mvp.contract.MainContract;
+import com.juying.warenqi.mvp.model.entity.BaseBean;
+import com.juying.warenqi.mvp.model.entity.TakeTask;
+import com.juying.warenqi.mvp.model.entity.TaskCount;
+import com.juying.warenqi.utils.RxUtils;
 
 import javax.inject.Inject;
 
+import io.reactivex.annotations.NonNull;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 
 @ActivityScope
@@ -29,6 +35,32 @@ public class MainPresenter extends BasePresenter<MainContract.Model, MainContrac
         this.mApplication = application;
         this.mImageLoader = imageLoader;
         this.mAppManager = appManager;
+    }
+
+    public void getTaskInfo() {
+        mModel.getTaskInfo()
+                .compose(RxUtils.applySchedulers(mRootView))
+                .compose(RxUtils.bindToLifecycle(mRootView))
+                .map(BaseBean::getResults)
+                .subscribe(new ErrorHandleSubscriber<TakeTask>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull TakeTask takeTask) {
+                        mRootView.showMyTaskDot(takeTask);
+                    }
+                });
+    }
+
+    public void getTaskCount() {
+        mModel.getTaskCount()
+                .compose(RxUtils.applySchedulers(mRootView))
+                .compose(RxUtils.bindToLifecycle(mRootView))
+                .map(BaseBean::getResults)
+                .subscribe(new ErrorHandleSubscriber<TaskCount>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull TaskCount taskCount) {
+                        mRootView.showTaskCountDot(taskCount);
+                    }
+                });
     }
 
     @Override

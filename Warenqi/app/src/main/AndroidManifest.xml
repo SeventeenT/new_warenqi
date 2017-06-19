@@ -39,10 +39,10 @@
         <!-- AutoLayout配置 -->
         <meta-data
             android:name="design_width"
-            android:value="720" />
+            android:value="768" />
         <meta-data
             android:name="design_height"
-            android:value="1080" />
+            android:value="1280" />
 
         <!-- glide配置 -->
         <meta-data

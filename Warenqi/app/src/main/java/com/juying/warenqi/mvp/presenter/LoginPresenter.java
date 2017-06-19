@@ -65,6 +65,9 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
         sp.put("isLogin", true);
         sp.put("userId", accountInfo.getId());
         sp.put("nick", accountInfo.getNick());
+        sp.put("headPic", accountInfo.getHeadPic());
+        sp.put("payPass", accountInfo.getPayPassword());
+        sp.put("vipStatus", accountInfo.getVipStatus());
     }
 
     @Override
