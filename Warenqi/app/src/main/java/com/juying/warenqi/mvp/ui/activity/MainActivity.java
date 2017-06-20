@@ -84,6 +84,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        UiUtils.statuInScreen(this);
         mPresenter.getTaskInfo();
         mPresenter.getTaskCount();
         toolbarBack.setVisibility(View.GONE);

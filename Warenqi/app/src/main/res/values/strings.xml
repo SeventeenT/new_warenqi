@@ -6,4 +6,7 @@
     <string name="forget_password">忘记密码？</string>
     <string name="login">登录</string>
     <string name="register">立即注册</string>
+    <string name="my_gold">我的金币</string>
+    <string name="my_deposit">我的本金</string>
+    <string name="estimate_income">预估游戏收入：%1$s(今日收入%2$s)，垫付本金 %3$s</string>
 </resources>
