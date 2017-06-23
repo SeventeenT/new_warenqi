@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.FragmentUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -84,7 +85,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        UiUtils.statuInScreen(this);
         mPresenter.getTaskInfo();
         mPresenter.getTaskCount();
         toolbarBack.setVisibility(View.GONE);

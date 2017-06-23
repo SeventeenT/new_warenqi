@@ -3,10 +3,17 @@
     <string name="input_username_hint">输入用户名/手机号码</string>
     <string name="input_password">输入密码</string>
     <string name="contact_service">联系客服</string>
+    <string name="online_service">在线客服</string>
     <string name="forget_password">忘记密码？</string>
     <string name="login">登录</string>
     <string name="register">立即注册</string>
     <string name="my_gold">我的金币</string>
     <string name="my_deposit">我的本金</string>
+    <string name="see_more">查看更多</string>
     <string name="estimate_income">预估游戏收入：%1$s(今日收入%2$s)，垫付本金 %3$s</string>
+    <string name="beginner_guide">新手指导</string>
+    <string name="daily_sign_in">每日签到</string>
+    <string name="task_center">游戏大厅</string>
+    <string name="invite_friends">邀请好友</string>
+    <string name="promote_rewards">推广奖励</string>
 </resources>

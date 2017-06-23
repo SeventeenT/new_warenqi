@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    app:emptyView="@layout/empty_view"
+    app:errorView="@layout/error_view"
+    app:loadingView="@layout/loading_view"
+    app:noNetworkView="@layout/no_network_view">
 
-    <RelativeLayout
+    <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="194dp"
+            android:layout_height="388px"
             android:background="@color/colorPrimary" />
 
         <TextView
@@ -23,7 +27,7 @@
             android:layout_margin="@dimen/common_margin_value"
             android:drawableLeft="@drawable/ic_service"
             android:drawablePadding="10dp"
-            android:text="在线客服"
+            android:text="@string/online_service"
             android:textColor="@android:color/white" />
 
         <android.support.v7.widget.CardView
@@ -117,33 +121,174 @@
 
                 <TextView
                     android:id="@+id/tv_today_income"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/grey_999fb6"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="@dimen/common_margin_value"
-                    android:layout_marginRight="@dimen/common_margin_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ll_money_container"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/common_margin_value"
+                    android:layout_marginRight="@dimen/common_margin_value"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/grey_999fb6"
+                    android:textSize="12sp"
                     tools:text="@string/estimate_income" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
         <LinearLayout
-            android:paddingLeft="@dimen/common_margin_value"
-            android:paddingRight="@dimen/common_margin_value"
-            android:layout_below="@+id/card_view"
+            android:id="@+id/ll_notification"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="90px"
+            android:layout_below="@+id/card_view"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/common_margin_value"
+            android:paddingRight="@dimen/common_margin_value">
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_notice" />
+
+            <com.sunfusheng.marqueeview.MarqueeView
+                android:id="@+id/mv_notification"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                app:mvSingleLine="true"
+                app:mvTextColor="@color/grey_333"
+                app:mvTextSize="12sp" />
+
+            <TextView
+                android:id="@+id/btn_more_notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/see_more"
+                android:textColor="@color/grey_333"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/ll_navi_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_notification"
+            android:background="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="16dp"
+                    android:drawableTop="@drawable/ic_newcomer"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/grey_333"
+                    android:text="@string/beginner_guide" />
+
+                <include layout="@layout/divider_view" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="16dp"
+                    android:drawableTop="@drawable/ic_sign"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/grey_333"
+                    android:text="@string/beginner_guide" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/grey_e2e2e2" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:drawablePadding="16dp"
+                android:drawableTop="@drawable/ic_hall"
+                android:gravity="center"
+                android:padding="20dp"
+                android:textSize="12sp"
+                android:textColor="@color/grey_333"
+                android:text="@string/task_center" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/grey_e2e2e2" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="16dp"
+                        android:drawableTop="@drawable/ic_invitation"
+                        android:gravity="center"
+                        android:padding="20dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/grey_333"
+                        android:text="@string/invite_friends" />
+
+                    <ImageView
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/pic_new"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+                <include layout="@layout/divider_view" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="16dp"
+                    android:drawableTop="@drawable/ic_extension"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/grey_333"
+                    android:text="@string/promote_rewards" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.youth.banner.Banner
+            android:layout_below="@+id/ll_navi_table"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"/>
+
+    </com.zhy.autolayout.AutoRelativeLayout>
 
 </com.classic.common.MultipleStatusView>

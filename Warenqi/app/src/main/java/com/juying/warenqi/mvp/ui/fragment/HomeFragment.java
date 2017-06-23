@@ -6,23 +6,45 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
-
+import com.juying.warenqi.R;
 import com.juying.warenqi.di.component.DaggerHomeComponent;
 import com.juying.warenqi.di.module.HomeModule;
 import com.juying.warenqi.mvp.contract.HomeContract;
 import com.juying.warenqi.mvp.presenter.HomePresenter;
+import com.sunfusheng.marqueeview.MarqueeView;
+import com.youth.banner.Banner;
 
-import com.juying.warenqi.R;
+import butterknife.BindView;
+import butterknife.OnClick;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View {
 
+
+    @BindView(R.id.tv_my_gold)
+    TextView tvMyGold;
+    @BindView(R.id.ll_my_gold_container)
+    LinearLayout llMyGoldContainer;
+    @BindView(R.id.tv_my_deposit)
+    TextView tvMyDeposit;
+    @BindView(R.id.ll_my_deposit_container)
+    LinearLayout llMyDepositContainer;
+    @BindView(R.id.ll_money_container)
+    LinearLayout llMoneyContainer;
+    @BindView(R.id.tv_today_income)
+    TextView tvTodayIncome;
+    @BindView(R.id.mv_notification)
+    MarqueeView mvNotification;
+    @BindView(R.id.banner)
+    Banner banner;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -94,4 +116,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     }
 
+    @OnClick({R.id.btn_online_service, R.id.btn_more_notifications})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_online_service:
+                break;
+            case R.id.btn_more_notifications:
+                break;
+        }
+    }
 }
