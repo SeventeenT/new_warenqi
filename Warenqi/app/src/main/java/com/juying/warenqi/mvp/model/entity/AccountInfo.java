@@ -19,8 +19,11 @@ public class AccountInfo {
     private int buyerTaskCountFinished;
     private long createTime;
     private long dueTime;
+    private long deposit;
+    private int experience;
     private String email;
     private int id;
+    private long ingot;
     private boolean isClearView;
     private int level;
     private int lockedPledage;
@@ -147,6 +150,30 @@ public class AccountInfo {
 
     public void setDueTime(long dueTime) {
         this.dueTime = dueTime;
+    }
+
+    public long getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(long deposit) {
+        this.deposit = deposit;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public long getIngot() {
+        return ingot;
+    }
+
+    public void setIngot(long ingot) {
+        this.ingot = ingot;
     }
 
     public String getEmail() {

@@ -1,7 +1,15 @@
 package com.juying.warenqi.mvp.contract;
 
-import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.jess.arms.mvp.IView;
+import com.juying.warenqi.mvp.model.entity.AccountInfo;
+import com.juying.warenqi.mvp.model.entity.Banner;
+import com.juying.warenqi.mvp.model.entity.GainedGold;
+import com.juying.warenqi.mvp.model.entity.Notice;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 
 public interface HomeContract {
@@ -12,6 +20,9 @@ public interface HomeContract {
 
     //Model层定义接口,外部只需关心model返回的数据,无需关心内部细节,及是否使用缓存
     interface Model extends IModel {
-
+        Observable<AccountInfo> getGoldInfo();
+        Observable<GainedGold> getGainedGold();
+        Observable<Banner> getBanner();
+        Observable<List<Notice>> getNotices();
     }
 }

@@ -3,25 +3,40 @@ package com.juying.warenqi.mvp.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.classic.common.MultipleStatusView;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 import com.juying.warenqi.R;
+import com.juying.warenqi.app.BannerGlideImageLoader;
 import com.juying.warenqi.di.component.DaggerHomeComponent;
 import com.juying.warenqi.di.module.HomeModule;
 import com.juying.warenqi.mvp.contract.HomeContract;
+import com.juying.warenqi.mvp.model.entity.AccountInfo;
+import com.juying.warenqi.mvp.model.entity.GainedGold;
+import com.juying.warenqi.mvp.model.entity.Notice;
+import com.juying.warenqi.mvp.model.entity.ParsedBanner;
 import com.juying.warenqi.mvp.presenter.HomePresenter;
+import com.orhanobut.logger.Logger;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -45,6 +60,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     MarqueeView mvNotification;
     @BindView(R.id.banner)
     Banner banner;
+    @BindView(R.id.status_layout)
+    MultipleStatusView statusLayout;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -68,7 +85,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        banner.setImageLoader(new BannerGlideImageLoader());
+        mPresenter.getGoldInfo();
+        mPresenter.getGainedGold();
+        mPresenter.getBanner();
+        mPresenter.getNotices();
     }
 
     /**
@@ -91,12 +112,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void showLoading() {
-
+        statusLayout.showLoading();
     }
 
     @Override
     public void hideLoading() {
-
+        statusLayout.showContent();
     }
 
     @Override
@@ -114,6 +135,111 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     public void killMyself() {
 
+    }
+
+    public void setGoldInfo(AccountInfo goldInfo) {
+        long ingot = goldInfo.getIngot();
+        tvMyGold.setText(BigDecimal.valueOf(ingot).movePointLeft(2).toPlainString());
+        long deposit = goldInfo.getDeposit();
+        tvMyDeposit.setText(BigDecimal.valueOf(deposit).movePointLeft(2).toPlainString());
+    }
+
+    public void setGainedGold(GainedGold gold) {
+        long ingotProcess = gold.getIngotProcess();
+        String estimatedIncomeStr = BigDecimal.valueOf(ingotProcess).movePointLeft(2).toPlainString();
+        long todayIngot = gold.getTodayIngot();
+        String todayIncomeStr = BigDecimal.valueOf(todayIngot).movePointLeft(2).toPlainString();
+        long pledgeIngot = gold.getPledgeIngot();
+        String depositStr = BigDecimal.valueOf(pledgeIngot).movePointLeft(2).toPlainString();
+        tvTodayIncome.setText(String.format(getString(R.string.estimate_income),
+                estimatedIncomeStr, todayIncomeStr, depositStr));
+    }
+
+    public void setBanner(com.juying.warenqi.mvp.model.entity.Banner banner) {
+
+        List<ParsedBanner> banners = new ArrayList<>();
+        if (!TextUtils.isEmpty(banner.getBannerImg1())) {
+            ParsedBanner banner1 = new ParsedBanner();
+            banner1.setImgUrl(banner.getBannerImg1());
+            banner1.setImgLinkUrl(banner.getBannerLink1());
+            banners.add(banner1);
+        }
+
+        if (!TextUtils.isEmpty(banner.getBannerImg2())) {
+            ParsedBanner banner2 = new ParsedBanner();
+            banner2.setImgUrl(banner.getBannerImg2());
+            banner2.setImgLinkUrl(banner.getBannerLink2());
+            banners.add(banner2);
+        }
+
+        if (!TextUtils.isEmpty(banner.getBannerImg3())) {
+            ParsedBanner banner3 = new ParsedBanner();
+            banner3.setImgUrl(banner.getBannerImg3());
+            banner3.setImgLinkUrl(banner.getBannerLink3());
+            banners.add(banner3);
+        }
+
+        if (!TextUtils.isEmpty(banner.getBannerImg4())) {
+            ParsedBanner banner4 = new ParsedBanner();
+            banner4.setImgUrl(banner.getBannerImg4());
+            banner4.setImgLinkUrl(banner.getBannerLink4());
+            banners.add(banner4);
+        }
+
+        if (!TextUtils.isEmpty(banner.getBannerImg5())) {
+            ParsedBanner banner5 = new ParsedBanner();
+            banner5.setImgUrl(banner.getBannerImg5());
+            banner5.setImgLinkUrl(banner.getBannerLink5());
+            banners.add(banner5);
+        }
+
+        this.banner.setImages(banners);
+        this.banner.start();
+        this.banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Logger.d(banners.get(position).getImgUrl());
+                Logger.d(banners.get(position).getImgLinkUrl());
+            }
+        });
+    }
+
+    public void setNotices(List<Notice> notices) {
+        Observable.just(notices)
+                .map(noticeList -> {
+                    List<String> list = new ArrayList<>();
+                    for (Notice notice : noticeList) {
+                        list.add(notice.getTitle());
+                    }
+                    return list;
+                })
+                .subscribe(new Consumer<List<String>>() {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull List<String> strings) throws Exception {
+                        mvNotification.setNotices(strings);
+                        mvNotification.start();
+                    }
+                });
+        mvNotification.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, TextView textView) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        banner.startAutoPlay();
+        mvNotification.startFlipping();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        banner.stopAutoPlay();
+        mvNotification.stopFlipping();
     }
 
     @OnClick({R.id.btn_online_service, R.id.btn_more_notifications})

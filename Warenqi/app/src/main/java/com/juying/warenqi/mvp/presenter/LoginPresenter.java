@@ -10,16 +10,11 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
 import com.juying.warenqi.mvp.contract.LoginContract;
 import com.juying.warenqi.mvp.model.entity.AccountInfo;
-import com.juying.warenqi.mvp.model.entity.BaseBean;
 import com.juying.warenqi.mvp.ui.activity.MainActivity;
 import com.juying.warenqi.utils.RxUtils;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 
@@ -45,12 +40,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
         mModel.login(username, password)
                 .compose(RxUtils.applySchedulers(mRootView))
                 .compose(RxUtils.bindToLifecycle(mRootView))
-                .flatMap(new Function<BaseBean<AccountInfo>, ObservableSource<AccountInfo>>() {
-                    @Override
-                    public ObservableSource<AccountInfo> apply(@NonNull BaseBean<AccountInfo> infoBaseBean) throws Exception {
-                        return Observable.just(infoBaseBean.getResults());
-                    }
-                })
                 .subscribe(accountInfo -> {
                     mRootView.showMessage("登录成功");
                     saveAccountInfo(accountInfo);

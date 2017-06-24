@@ -16,6 +16,7 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 import com.google.gson.JsonParseException;
@@ -25,6 +26,7 @@ import com.jess.arms.base.delegate.AppDelegate;
 import com.jess.arms.di.module.GlobalConfigModule;
 import com.jess.arms.http.GlobalHttpHandler;
 import com.jess.arms.http.RequestInterceptor;
+import com.jess.arms.integration.AppManager;
 import com.jess.arms.integration.ConfigModule;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.utils.UiUtils;
@@ -36,8 +38,10 @@ import com.juying.warenqi.http.PersistentCookiesInterceptor;
 import com.juying.warenqi.mvp.model.api.Api;
 import com.juying.warenqi.mvp.model.api.cache.CommonCache;
 import com.juying.warenqi.mvp.model.api.service.CommonService;
+import com.juying.warenqi.mvp.model.api.service.HomeService;
 import com.juying.warenqi.mvp.model.api.service.LoginService;
 import com.juying.warenqi.mvp.model.api.service.MainService;
+import com.juying.warenqi.mvp.ui.activity.LoginActivity;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
@@ -102,8 +106,6 @@ public class GlobalConfiguration implements ConfigModule {
                                             });
 
                                 }
-
-                                Logger.w(object.toString());
                             }
 
                         } catch (JSONException e) {
@@ -137,7 +139,7 @@ public class GlobalConfiguration implements ConfigModule {
                     } else if (t instanceof SocketTimeoutException) {
                         msg = "请求网络超时";
                     } else if (t instanceof ApiException) {
-                        msg = handleServerErrorStatus((ApiException) t);
+                        msg = handleServerErrorStatus((ApiException) t, context1);
                     } else if (t instanceof HttpException) {
                         HttpException httpException = (HttpException) t;
                         msg = convertStatusCode(httpException);
@@ -166,7 +168,11 @@ public class GlobalConfiguration implements ConfigModule {
 
     @Override
     public void registerComponents(Context context, IRepositoryManager repositoryManager) {
-        repositoryManager.injectRetrofitService(CommonService.class, LoginService.class, MainService.class);
+        repositoryManager.injectRetrofitService(
+                CommonService.class,
+                LoginService.class,
+                MainService.class,
+                HomeService.class);
         repositoryManager.injectCacheService(CommonCache.class);
     }
 
@@ -298,9 +304,15 @@ public class GlobalConfiguration implements ConfigModule {
         });
     }
 
-    private String handleServerErrorStatus(ApiException e) {
+    private String handleServerErrorStatus(ApiException e, Context context1) {
         if (e.getCode() == -1) {
             ToastUtils.showShort("测试到");
+        } else if (e.getCode() == 561) {
+            ToastUtils.showShort("请重新登录");
+            SPUtils.getInstance().put("isLogin", false);
+            AppManager appManager = ((BaseApplication) context1).getAppComponent().appManager();
+            appManager.killAll();
+            appManager.startActivity(LoginActivity.class);
         }
         return e.getMessage();
     }

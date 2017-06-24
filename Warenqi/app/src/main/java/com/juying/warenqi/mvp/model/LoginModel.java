@@ -9,7 +9,6 @@ import com.jess.arms.mvp.BaseModel;
 import com.juying.warenqi.mvp.contract.LoginContract;
 import com.juying.warenqi.mvp.model.api.service.LoginService;
 import com.juying.warenqi.mvp.model.entity.AccountInfo;
-import com.juying.warenqi.mvp.model.entity.BaseBean;
 
 import javax.inject.Inject;
 
@@ -35,8 +34,11 @@ public class LoginModel extends BaseModel implements LoginContract.Model {
     }
 
     @Override
-    public Observable<BaseBean<AccountInfo>> login(String username, String password) {
-        return mRepositoryManager.obtainRetrofitService(LoginService.class).login(username, password);
+    public Observable<AccountInfo> login(String username, String password) {
+        return mRepositoryManager
+                .obtainRetrofitService(LoginService.class)
+                .login(username, password)
+                .flatMap(infoBaseBean -> Observable.just(infoBaseBean.getResults()));
     }
 
 }
