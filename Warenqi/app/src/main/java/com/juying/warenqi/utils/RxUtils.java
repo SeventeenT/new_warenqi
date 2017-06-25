@@ -1,6 +1,7 @@
 package com.juying.warenqi.utils;
 
 import com.jess.arms.mvp.IView;
+import com.juying.warenqi.app.IStatusView;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle2.components.support.RxFragment;
@@ -9,6 +10,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 /**
  * Created by jess on 11/10/2016 16:39
@@ -32,7 +34,12 @@ public class RxUtils {
                         })
                         .subscribeOn(AndroidSchedulers.mainThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doAfterTerminate(view::hideLoading)
+                        .retryWhen(new RetryWithDelay(3, 2))
+                        .doOnComplete(view::hideLoading)
+                        .doOnError(throwable -> {
+                            if (view instanceof IStatusView)
+                                ((IStatusView) view).showError();
+                        })
                         .compose(RxUtils.bindToLifecycle(view));
             }
         };

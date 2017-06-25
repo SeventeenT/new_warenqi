@@ -2,7 +2,7 @@
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_ddd"
+    android:background="@color/background_grey_f5f4f9"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 

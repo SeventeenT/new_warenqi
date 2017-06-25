@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.classic.common.MultipleStatusView;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
@@ -26,6 +25,7 @@ import com.juying.warenqi.mvp.model.entity.ParsedBanner;
 import com.juying.warenqi.mvp.presenter.HomePresenter;
 import com.orhanobut.logger.Logger;
 import com.sunfusheng.marqueeview.MarqueeView;
+import com.weavey.loading.lib.LoadingLayout;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -39,7 +39,6 @@ import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
-
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View {
 
@@ -60,8 +59,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     MarqueeView mvNotification;
     @BindView(R.id.banner)
     Banner banner;
-    @BindView(R.id.status_layout)
-    MultipleStatusView statusLayout;
+    @BindView(R.id.loading_layout)
+    LoadingLayout mLoadingLayout;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -85,7 +84,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        initRequest();
         banner.setImageLoader(new BannerGlideImageLoader());
+        mLoadingLayout.setOnReloadListener(v -> initRequest());
+    }
+
+    private void initRequest() {
         mPresenter.getGoldInfo();
         mPresenter.getGainedGold();
         mPresenter.getBanner();
@@ -112,12 +116,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void showLoading() {
-        statusLayout.showLoading();
+        mLoadingLayout.setStatus(LoadingLayout.Loading);
     }
 
     @Override
     public void hideLoading() {
-        statusLayout.showContent();
+        mLoadingLayout.setStatus(LoadingLayout.Success);
     }
 
     @Override
@@ -250,5 +254,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             case R.id.btn_more_notifications:
                 break;
         }
+    }
+
+    @Override
+    public void showError() {
+        mLoadingLayout.setStatus(LoadingLayout.Error);
     }
 }

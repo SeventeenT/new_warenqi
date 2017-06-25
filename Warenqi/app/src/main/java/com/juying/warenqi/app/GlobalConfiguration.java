@@ -53,10 +53,12 @@ import com.umeng.message.PushAgent;
 import com.umeng.message.UmengMessageHandler;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
+import com.weavey.loading.lib.LoadingLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -134,7 +136,7 @@ public class GlobalConfiguration implements ConfigModule {
                     Logger.t("Catch-Error").w(t.getMessage());
                     //这里不光是只能打印错误,还可以根据不同的错误作出不同的逻辑处理
                     String msg = "未知错误";
-                    if (t instanceof UnknownHostException) {
+                    if (t instanceof UnknownHostException || t instanceof ConnectException) {
                         msg = "网络不可用";
                     } else if (t instanceof SocketTimeoutException) {
                         msg = "请求网络超时";
@@ -213,6 +215,20 @@ public class GlobalConfiguration implements ConfigModule {
 
                 MobclickAgent.openActivityDurationTrack(true);
                 MobclickAgent.setScenarioType(application, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
+                LoadingLayout.getConfig()
+                        .setErrorText("出错啦~请稍后重试！")
+                        .setEmptyText("抱歉，暂无数据")
+                        .setNoNetworkText("无网络连接，请检查您的网络···")
+                        .setErrorImage(R.drawable.ic_error)
+                        .setEmptyImage(R.drawable.ic_empty)
+                        .setNoNetworkImage(R.drawable.ic_no_network)
+                        .setAllTipTextColor(R.color.grey_333)
+                        .setAllTipTextSize(14)
+                        .setReloadButtonText("点我重试哦")
+                        .setReloadButtonTextSize(14)
+                        .setReloadButtonTextColor(R.color.grey_333)
+                        .setReloadButtonWidthAndHeight(150, 40);
             }
 
             @Override

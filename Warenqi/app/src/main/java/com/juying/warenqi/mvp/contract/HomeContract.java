@@ -1,7 +1,7 @@
 package com.juying.warenqi.mvp.contract;
 
 import com.jess.arms.mvp.IModel;
-import com.jess.arms.mvp.IView;
+import com.juying.warenqi.app.IStatusView;
 import com.juying.warenqi.mvp.model.entity.AccountInfo;
 import com.juying.warenqi.mvp.model.entity.Banner;
 import com.juying.warenqi.mvp.model.entity.GainedGold;
@@ -14,7 +14,7 @@ import io.reactivex.Observable;
 
 public interface HomeContract {
     //对于经常使用的关于UI的方法可以定义到BaseView中,如显示隐藏进度条,和显示文字消息
-    interface View extends IView {
+    interface View extends IStatusView {
 
     }
 

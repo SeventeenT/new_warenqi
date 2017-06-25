@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.classic.common.MultipleStatusView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.weavey.loading.lib.LoadingLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:id="@+id/status_layout"
-    app:emptyView="@layout/empty_view"
-    app:errorView="@layout/error_view"
-    app:loadingView="@layout/loading_view"
-    app:noNetworkView="@layout/no_network_view">
+    android:id="@+id/loading_layout">
 
     <com.zhy.autolayout.AutoRelativeLayout
         android:layout_width="match_parent"
@@ -292,4 +288,4 @@
 
     </com.zhy.autolayout.AutoRelativeLayout>
 
-</com.classic.common.MultipleStatusView>
+</com.weavey.loading.lib.LoadingLayout>

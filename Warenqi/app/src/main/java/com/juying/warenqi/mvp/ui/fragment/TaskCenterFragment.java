@@ -3,26 +3,33 @@ package com.juying.warenqi.mvp.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
-
+import com.juying.warenqi.R;
 import com.juying.warenqi.di.component.DaggerTaskCenterComponent;
 import com.juying.warenqi.di.module.TaskCenterModule;
 import com.juying.warenqi.mvp.contract.TaskCenterContract;
 import com.juying.warenqi.mvp.presenter.TaskCenterPresenter;
 
-import com.juying.warenqi.R;
+import butterknife.BindView;
+import butterknife.OnClick;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 
 public class TaskCenterFragment extends BaseFragment<TaskCenterPresenter> implements TaskCenterContract.View {
 
+
+    @BindView(R.id.rv_task_types)
+    RecyclerView rvTaskTypes;
 
     public static TaskCenterFragment newInstance() {
         TaskCenterFragment fragment = new TaskCenterFragment();
@@ -46,7 +53,7 @@ public class TaskCenterFragment extends BaseFragment<TaskCenterPresenter> implem
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        mPresenter.getTaskCount();
     }
 
     /**
@@ -94,4 +101,13 @@ public class TaskCenterFragment extends BaseFragment<TaskCenterPresenter> implem
 
     }
 
+    @OnClick(R.id.btn_auto_take_task)
+    public void onViewClicked() {
+    }
+
+    @Override
+    public void setAdapter(BaseQuickAdapter adapter) {
+        rvTaskTypes.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        rvTaskTypes.setAdapter(adapter);
+    }
 }

@@ -63,7 +63,8 @@ dependencies {
     compile rootProject.ext.dependencies["FlycoTabLayout"]
     compile rootProject.ext.dependencies["banner"]
     compile rootProject.ext.dependencies["marqueeview"]
-    compile rootProject.ext.dependencies["multiple-status-view"]
+    compile rootProject.ext.dependencies["loading-layout"]
+    compile rootProject.ext.dependencies["brvah"]
     //arms
     compile 'me.jessyan:arms:2.1.0'
     //test

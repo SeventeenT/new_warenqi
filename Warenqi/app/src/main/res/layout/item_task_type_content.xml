@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="220px">
+
+    <include layout="@layout/divider_view"/>
+
+    <TextView
+        android:id="@+id/tv_task_type_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        tools:text="@string/app_name" />
+
+    <TextView
+        android:id="@+id/tv_task_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:layout_toRightOf="@+id/tv_task_type_name"
+        android:background="@drawable/shape_circle_red"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:drawablePadding="5dp"
+        android:textSize="8sp"
+        tools:text="1" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

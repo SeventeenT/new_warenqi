@@ -16,4 +16,11 @@
     <string name="task_center">游戏大厅</string>
     <string name="invite_friends">邀请好友</string>
     <string name="promote_rewards">推广奖励</string>
+    <string name="flow_task">人气游戏</string>
+    <string name="normal_task">常规游戏</string>
+    <string name="direct_task">直通车游戏</string>
+    <string name="activity_task">活动游戏</string>
+    <string name="buy_task">高佣金游戏</string>
+    <string name="advance_pay_task">优质游戏</string>
+    <string name="several_days_task">多天游戏</string>
 </resources>
