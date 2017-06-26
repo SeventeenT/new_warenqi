@@ -271,34 +271,34 @@ public class GlobalConfiguration implements ConfigModule {
 
             @Override
             public void onActivityStarted(Activity activity) {
-                Logger.w(activity + " - onActivityStarted");
+                Timber.w(activity + " - onActivityStarted");
             }
 
             @Override
             public void onActivityResumed(Activity activity) {
-                Logger.w(activity + " - onActivityResumed");
+                Timber.w(activity + " - onActivityResumed");
                 MobclickAgent.onResume(activity);
             }
 
             @Override
             public void onActivityPaused(Activity activity) {
-                Logger.w(activity + " - onActivityPaused");
+                Timber.w(activity + " - onActivityPaused");
                 MobclickAgent.onPause(activity);
             }
 
             @Override
             public void onActivityStopped(Activity activity) {
-                Logger.w(activity + " - onActivityStopped");
+                Timber.w(activity + " - onActivityStopped");
             }
 
             @Override
             public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-                Logger.w(activity + " - onActivitySaveInstanceState");
+                Timber.w(activity + " - onActivitySaveInstanceState");
             }
 
             @Override
             public void onActivityDestroyed(Activity activity) {
-                Logger.w(activity + " - onActivityDestroyed");
+                Timber.w(activity + " - onActivityDestroyed");
             }
         });
     }
