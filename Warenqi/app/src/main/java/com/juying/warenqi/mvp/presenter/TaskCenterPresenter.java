@@ -10,7 +10,7 @@ import com.jess.arms.widget.imageloader.ImageLoader;
 import com.juying.warenqi.R;
 import com.juying.warenqi.mvp.contract.TaskCenterContract;
 import com.juying.warenqi.mvp.model.entity.TaskCenterTypeContent;
-import com.juying.warenqi.mvp.model.entity.TaskCenterTypeTitle;
+import com.juying.warenqi.mvp.model.entity.TaskCenterTypeSection;
 import com.juying.warenqi.mvp.ui.adapter.TaskCenterTypeAdapter;
 import com.juying.warenqi.utils.RxUtils;
 
@@ -31,7 +31,7 @@ public class TaskCenterPresenter extends BasePresenter<TaskCenterContract.Model,
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
     private BaseQuickAdapter mAdapter;
-    private List<TaskCenterTypeTitle> mTitleList = new ArrayList<>();
+    private List<TaskCenterTypeSection> mTitleList = new ArrayList<>();
 
     @Inject
     public TaskCenterPresenter(TaskCenterContract.Model model, TaskCenterContract.View rootView
@@ -54,33 +54,33 @@ public class TaskCenterPresenter extends BasePresenter<TaskCenterContract.Model,
                 .compose(RxUtils.bindToLifecycle(mRootView))
                 .flatMap(taskCount -> {
                     mTitleList.clear();
-                    mTitleList.add(new TaskCenterTypeTitle(true,
+                    mTitleList.add(new TaskCenterTypeSection(true,
                             mApplication.getString(R.string.flow_task), R.color.blue_4680fe));
 
                     TaskCenterTypeContent normalTask = new TaskCenterTypeContent(mApplication.getString(R.string.normal_task),
                             R.drawable.ic_routine);
                     normalTask.setTaskTaskCount(taskCount.getOrderCount());
-                    mTitleList.add(new TaskCenterTypeTitle(normalTask));
+                    mTitleList.add(new TaskCenterTypeSection(normalTask));
                     TaskCenterTypeContent directTask = new TaskCenterTypeContent(mApplication.getString(R.string.direct_task),
                             R.drawable.ic_train);
                     directTask.setTaskTaskCount(taskCount.getZtcCount());
-                    mTitleList.add(new TaskCenterTypeTitle(directTask));
+                    mTitleList.add(new TaskCenterTypeSection(directTask));
                     TaskCenterTypeContent activityTask = new TaskCenterTypeContent(mApplication.getString(R.string.activity_task),
                             R.drawable.ic_activity);
                     activityTask.setTaskTaskCount(taskCount.getHdCount());
-                    mTitleList.add(new TaskCenterTypeTitle(activityTask));
+                    mTitleList.add(new TaskCenterTypeSection(activityTask));
 
-                    mTitleList.add(new TaskCenterTypeTitle(true,
+                    mTitleList.add(new TaskCenterTypeSection(true,
                             mApplication.getString(R.string.buy_task), R.color.red_fb607f));
 
                     TaskCenterTypeContent advancePayTask = new TaskCenterTypeContent(mApplication.getString(R.string.advance_pay_task),
                             R.drawable.ic_quality);
                     advancePayTask.setTaskTaskCount(taskCount.getDfCount());
-                    mTitleList.add(new TaskCenterTypeTitle(advancePayTask));
+                    mTitleList.add(new TaskCenterTypeSection(advancePayTask));
                     TaskCenterTypeContent daysTask = new TaskCenterTypeContent(mApplication.getString(R.string.several_days_task),
                             R.drawable.ic_longtime);
                     daysTask.setTaskTaskCount(taskCount.getDaysDfCount());
-                    mTitleList.add(new TaskCenterTypeTitle(daysTask));
+                    mTitleList.add(new TaskCenterTypeSection(daysTask));
                     return Observable.just(mAdapter);
                 })
                 .subscribe(new ErrorHandleSubscriber<BaseQuickAdapter>(mErrorHandler) {

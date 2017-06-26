@@ -6,10 +6,12 @@
     <color name="white">#fff</color>
     <color name="background_grey_f5f4f9">#f5f4f9</color>
     <color name="grey_333">#333</color>
+    <color name="grey_999">#999</color>
     <color name="grey_e2e2e2">#e2e2e2</color>
     <color name="grey_ddd">#ddd</color>
     <color name="grey_999fb6">#999fb6</color>
     <color name="blue_4680fe">#4680fe</color>
     <color name="black_blue_353b55">#353b55</color>
     <color name="red_fb607f">#fb607f</color>
+    <color name="yellow_ffb64d">#ffb64d</color>
 </resources>

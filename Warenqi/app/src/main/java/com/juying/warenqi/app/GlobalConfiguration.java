@@ -41,6 +41,7 @@ import com.juying.warenqi.mvp.model.api.service.CommonService;
 import com.juying.warenqi.mvp.model.api.service.HomeService;
 import com.juying.warenqi.mvp.model.api.service.LoginService;
 import com.juying.warenqi.mvp.model.api.service.MainService;
+import com.juying.warenqi.mvp.model.api.service.MyTaskStateService;
 import com.juying.warenqi.mvp.ui.activity.LoginActivity;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -174,7 +175,8 @@ public class GlobalConfiguration implements ConfigModule {
                 CommonService.class,
                 LoginService.class,
                 MainService.class,
-                HomeService.class);
+                HomeService.class,
+                MyTaskStateService.class);
         repositoryManager.injectCacheService(CommonCache.class);
     }
 

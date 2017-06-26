@@ -3,26 +3,32 @@ package com.juying.warenqi.mvp.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
-
+import com.juying.warenqi.R;
 import com.juying.warenqi.di.component.DaggerMyTaskComponent;
 import com.juying.warenqi.di.module.MyTaskModule;
 import com.juying.warenqi.mvp.contract.MyTaskContract;
 import com.juying.warenqi.mvp.presenter.MyTaskPresenter;
 
-import com.juying.warenqi.R;
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 
 public class MyTaskFragment extends BaseFragment<MyTaskPresenter> implements MyTaskContract.View {
 
+
+    @BindView(R.id.rv_my_task_state)
+    RecyclerView rvMyTaskState;
 
     public static MyTaskFragment newInstance() {
         MyTaskFragment fragment = new MyTaskFragment();
@@ -46,7 +52,9 @@ public class MyTaskFragment extends BaseFragment<MyTaskPresenter> implements MyT
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        mPresenter.getFlowTaskCount();
+        mPresenter.getAdvancedPayTaskCount();
+        mPresenter.getAskTaskCount();
     }
 
     /**
@@ -94,4 +102,9 @@ public class MyTaskFragment extends BaseFragment<MyTaskPresenter> implements MyT
 
     }
 
+    @Override
+    public void setAdapter(BaseQuickAdapter adapter) {
+        rvMyTaskState.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        rvMyTaskState.setAdapter(adapter);
+    }
 }

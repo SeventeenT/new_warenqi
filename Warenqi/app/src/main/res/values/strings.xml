@@ -23,4 +23,11 @@
     <string name="buy_task">高佣金游戏</string>
     <string name="advance_pay_task">优质游戏</string>
     <string name="several_days_task">多天游戏</string>
+    <string name="wait_operate_task_status">待操作</string>
+    <string name="seller_operating_task_status">商家处理中</string>
+    <string name="wait_comment_task_status">待好评</string>
+    <string name="appeal_task_status">申诉中</string>
+    <string name="finished_task_status">已完成</string>
+    <string name="canceled_task_status">已取消</string>
+    <string name="ask_task">追评&amp;问大家</string>
 </resources>
