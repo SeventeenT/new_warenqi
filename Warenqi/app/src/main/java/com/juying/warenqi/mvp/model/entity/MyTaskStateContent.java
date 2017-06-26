@@ -9,19 +9,29 @@ package com.juying.warenqi.mvp.model.entity;
  */
 public class MyTaskStateContent {
     private String taskStatus;
+    private String taskType;
     private int taskTaskCount;
 
-    public MyTaskStateContent(String taskType, int taskTaskCount) {
-        this.taskStatus = taskType;
+    public MyTaskStateContent(String taskType, String taskStatus, int taskTaskCount) {
+        this.taskType = taskType;
+        this.taskStatus = taskStatus;
         this.taskTaskCount = taskTaskCount;
     }
 
     public String getTaskType() {
-        return taskStatus;
+        return taskType;
     }
 
     public void setTaskType(String taskType) {
-        this.taskStatus = taskType;
+        this.taskType = taskType;
+    }
+
+    public String getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(String taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
     public int getTaskTaskCount() {

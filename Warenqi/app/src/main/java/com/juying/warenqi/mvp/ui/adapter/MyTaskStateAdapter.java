@@ -50,7 +50,7 @@ public class MyTaskStateAdapter extends BaseSectionQuickAdapter<MyTaskStateSecti
     protected void convert(BaseAutoLayoutHolder helper, MyTaskStateSection item) {
         SpannableStringBuilder spannableStringBuilder = new SpanUtils().appendLine(item.t.getTaskTaskCount() + "单")
                 .appendLine()
-                .append(item.t.getTaskType()).setForegroundColor(Color.parseColor("#999999"))
+                .append(item.t.getTaskStatus()).setForegroundColor(Color.parseColor("#999999"))
                 .create();
         helper.setText(R.id.tv_my_task_state_content, spannableStringBuilder);
     }

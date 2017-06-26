@@ -49,10 +49,6 @@ public class MyTaskPresenter extends BasePresenter<MyTaskContract.Model, MyTaskC
     }
 
     public void getFlowTaskCount() {
-//        if (mAdapter == null) {
-//            mAdapter = new MyTaskStateAdapter(mList);
-//        }
-//        mRootView.setAdapter(mAdapter);
         baseQuickAdapterObservable1 = mModel.getFlowTaskCount()
                 .compose(RxUtils.applySchedulers(mRootView))
                 .compose(RxUtils.bindToLifecycle(mRootView))
@@ -60,16 +56,26 @@ public class MyTaskPresenter extends BasePresenter<MyTaskContract.Model, MyTaskC
                     mList.add(new MyTaskStateSection(true,
                             mApplication.getString(R.string.flow_task), R.color.blue_4680fe));
 
-                    MyTaskStateContent waitOperateStatus = new MyTaskStateContent(mApplication.getString(R.string.wait_operate_task_status),
-                            flowTaskCount.getWAIT());
-                    MyTaskStateContent sellerOperateStatus = new MyTaskStateContent(mApplication.getString(R.string.seller_operating_task_status),
-                            flowTaskCount.getSELLER_PROCESS());
-                    MyTaskStateContent appealStatus = new MyTaskStateContent(mApplication.getString(R.string.appeal_task_status),
-                            flowTaskCount.getAPPEAL());
-                    MyTaskStateContent finishedStatus = new MyTaskStateContent(mApplication.getString(R.string.finished_task_status),
-                            flowTaskCount.getFINISHED());
-                    MyTaskStateContent canceledStatus = new MyTaskStateContent(mApplication.getString(R.string.canceled_task_status),
-                            flowTaskCount.getCANCEL());
+                    MyTaskStateContent waitOperateStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.flow_task),
+                                    mApplication.getString(R.string.wait_operate_task_status),
+                                    flowTaskCount.getWAIT());
+                    MyTaskStateContent sellerOperateStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.flow_task),
+                                    mApplication.getString(R.string.seller_operating_task_status),
+                                    flowTaskCount.getSELLER_PROCESS());
+                    MyTaskStateContent appealStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.flow_task),
+                                    mApplication.getString(R.string.appeal_task_status),
+                                    flowTaskCount.getAPPEAL());
+                    MyTaskStateContent finishedStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.flow_task),
+                                    mApplication.getString(R.string.finished_task_status),
+                                    flowTaskCount.getFINISHED());
+                    MyTaskStateContent canceledStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.flow_task),
+                                    mApplication.getString(R.string.canceled_task_status),
+                                    flowTaskCount.getCANCEL());
                     mList.add(new MyTaskStateSection(waitOperateStatus));
                     mList.add(new MyTaskStateSection(sellerOperateStatus));
                     mList.add(new MyTaskStateSection(appealStatus));
@@ -87,10 +93,6 @@ public class MyTaskPresenter extends BasePresenter<MyTaskContract.Model, MyTaskC
     }
 
     public void getAdvancedPayTaskCount() {
-        if (mAdapter == null) {
-            mAdapter = new MyTaskStateAdapter(mList);
-        }
-        mRootView.setAdapter(mAdapter);
         baseQuickAdapterObservable2 = mModel.getAdvancedPayTaskCount()
                 .compose(RxUtils.applySchedulers(mRootView))
                 .compose(RxUtils.bindToLifecycle(mRootView))
@@ -98,18 +100,30 @@ public class MyTaskPresenter extends BasePresenter<MyTaskContract.Model, MyTaskC
                     mList.add(new MyTaskStateSection(true,
                             mApplication.getString(R.string.advance_pay_task), R.color.red_fb607f));
 
-                    MyTaskStateContent waitOperateStatus = new MyTaskStateContent(mApplication.getString(R.string.wait_operate_task_status),
-                            payTaskCount.getWAIT().getCount());
-                    MyTaskStateContent sellerOperateStatus = new MyTaskStateContent(mApplication.getString(R.string.seller_operating_task_status),
-                            payTaskCount.getSELLER_PROCESS().getCount());
-                    MyTaskStateContent waitCommentStatus = new MyTaskStateContent(mApplication.getString(R.string.wait_comment_task_status),
-                            payTaskCount.getWAIT_COMMENT().getCount());
-                    MyTaskStateContent appealStatus = new MyTaskStateContent(mApplication.getString(R.string.appeal_task_status),
-                            payTaskCount.getAPPEAL().getCount());
-                    MyTaskStateContent finishedStatus = new MyTaskStateContent(mApplication.getString(R.string.finished_task_status),
-                            payTaskCount.getFINISHED().getCount());
-                    MyTaskStateContent canceledStatus = new MyTaskStateContent(mApplication.getString(R.string.canceled_task_status),
-                            payTaskCount.getCANCEL().getCount());
+                    MyTaskStateContent waitOperateStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.advance_pay_task),
+                                    mApplication.getString(R.string.wait_operate_task_status),
+                                    payTaskCount.getWAIT().getCount());
+                    MyTaskStateContent sellerOperateStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.advance_pay_task),
+                                    mApplication.getString(R.string.seller_operating_task_status),
+                                    payTaskCount.getSELLER_PROCESS().getCount());
+                    MyTaskStateContent waitCommentStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.advance_pay_task),
+                                    mApplication.getString(R.string.wait_comment_task_status),
+                                    payTaskCount.getWAIT_COMMENT().getCount());
+                    MyTaskStateContent appealStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.advance_pay_task),
+                                    mApplication.getString(R.string.appeal_task_status),
+                                    payTaskCount.getAPPEAL().getCount());
+                    MyTaskStateContent finishedStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.advance_pay_task),
+                                    mApplication.getString(R.string.finished_task_status),
+                                    payTaskCount.getFINISHED().getCount());
+                    MyTaskStateContent canceledStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.advance_pay_task),
+                                    mApplication.getString(R.string.canceled_task_status),
+                                    payTaskCount.getCANCEL().getCount());
                     mList.add(new MyTaskStateSection(waitOperateStatus));
                     mList.add(new MyTaskStateSection(sellerOperateStatus));
                     mList.add(new MyTaskStateSection(waitCommentStatus));
@@ -139,16 +153,26 @@ public class MyTaskPresenter extends BasePresenter<MyTaskContract.Model, MyTaskC
                     mList.add(new MyTaskStateSection(true,
                             mApplication.getString(R.string.ask_task), R.color.yellow_ffb64d));
 
-                    MyTaskStateContent waitOperateStatus = new MyTaskStateContent(mApplication.getString(R.string.wait_operate_task_status),
-                            askTaskCount.getWAIT_BUYER_SUBMIT());
-                    MyTaskStateContent sellerOperateStatus = new MyTaskStateContent(mApplication.getString(R.string.seller_operating_task_status),
-                            askTaskCount.getWAIT_SELLER());
-                    MyTaskStateContent appealStatus = new MyTaskStateContent(mApplication.getString(R.string.appeal_task_status),
-                            askTaskCount.getAPPEAL());
-                    MyTaskStateContent finishedStatus = new MyTaskStateContent(mApplication.getString(R.string.finished_task_status),
-                            askTaskCount.getFINISHED());
-                    MyTaskStateContent canceledStatus = new MyTaskStateContent(mApplication.getString(R.string.canceled_task_status),
-                            askTaskCount.getCANCEL());
+                    MyTaskStateContent waitOperateStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.ask_task),
+                                    mApplication.getString(R.string.wait_operate_task_status),
+                                    askTaskCount.getWAIT_BUYER_SUBMIT());
+                    MyTaskStateContent sellerOperateStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.ask_task),
+                                    mApplication.getString(R.string.seller_operating_task_status),
+                                    askTaskCount.getWAIT_SELLER());
+                    MyTaskStateContent appealStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.ask_task),
+                                    mApplication.getString(R.string.appeal_task_status),
+                                    askTaskCount.getAPPEAL());
+                    MyTaskStateContent finishedStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.ask_task),
+                                    mApplication.getString(R.string.finished_task_status),
+                                    askTaskCount.getFINISHED());
+                    MyTaskStateContent canceledStatus =
+                            new MyTaskStateContent(mApplication.getString(R.string.ask_task),
+                                    mApplication.getString(R.string.canceled_task_status),
+                                    askTaskCount.getCANCEL());
                     mList.add(new MyTaskStateSection(waitOperateStatus));
                     mList.add(new MyTaskStateSection(sellerOperateStatus));
                     mList.add(new MyTaskStateSection(appealStatus));

@@ -1,6 +1,9 @@
 package com.juying.warenqi.mvp.ui.fragment;
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
@@ -17,7 +21,9 @@ import com.juying.warenqi.R;
 import com.juying.warenqi.di.component.DaggerMyTaskComponent;
 import com.juying.warenqi.di.module.MyTaskModule;
 import com.juying.warenqi.mvp.contract.MyTaskContract;
+import com.juying.warenqi.mvp.model.entity.MyTaskStateSection;
 import com.juying.warenqi.mvp.presenter.MyTaskPresenter;
+import com.juying.warenqi.mvp.ui.adapter.MyTaskStateAdapter;
 
 import butterknife.BindView;
 
@@ -106,5 +112,66 @@ public class MyTaskFragment extends BaseFragment<MyTaskPresenter> implements MyT
     public void setAdapter(BaseQuickAdapter adapter) {
         rvMyTaskState.setLayoutManager(new GridLayoutManager(getContext(), 3));
         rvMyTaskState.setAdapter(adapter);
+        adapter.setOnItemClickListener((adapter1, view, position) -> {
+            MyTaskStateSection item = (MyTaskStateSection) adapter1.getItem(position);
+            if (item != null && !item.isHeader)
+                ToastUtils.showShort(item.t.getTaskStatus());
+        });
+
+        rvMyTaskState.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                Drawable drawable = getActivity().getResources().getDrawable(R.drawable.shape_rv_divider);
+                drawHorizontal(drawable, c, parent);
+                drawVertical(drawable, c, parent);
+            }
+
+            public void drawHorizontal(Drawable drawable, Canvas c, RecyclerView parent) {
+                int childCount = parent.getChildCount();
+                for (int i = 0; i < childCount; i++) {
+                    final View child = parent.getChildAt(i);
+                    final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
+                            .getLayoutParams();
+                    final int left = child.getLeft() - params.leftMargin;
+                    final int right = child.getRight() + params.rightMargin
+                            + drawable.getIntrinsicWidth();
+                    final int top = child.getBottom() + params.bottomMargin;
+                    final int bottom = top + drawable.getIntrinsicHeight();
+                    drawable.setBounds(left, top, right, bottom);
+                    drawable.draw(c);
+                }
+            }
+
+            public void drawVertical(Drawable drawable, Canvas c, RecyclerView parent) {
+                final int childCount = parent.getChildCount();
+                for (int i = 0; i < childCount; i++) {
+                    final View child = parent.getChildAt(i);
+
+                    final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
+                            .getLayoutParams();
+                    final int top = child.getTop() - params.topMargin;
+                    final int bottom = child.getBottom() + params.bottomMargin;
+                    final int left = child.getRight() + params.rightMargin;
+                    final int right = left + drawable.getIntrinsicWidth();
+
+                    drawable.setBounds(left, top, right, bottom);
+                    drawable.draw(c);
+                }
+            }
+
+            @Override
+            public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
+                super.getItemOffsets(outRect, itemPosition, parent);
+                MyTaskStateAdapter parentAdapter = (MyTaskStateAdapter) parent.getAdapter();
+                int itemViewType = parentAdapter.getItemViewType(itemPosition);
+                switch (itemViewType) {
+                    case 1092:
+                        break;
+                    case 0:
+                        outRect.set(0, 1, 1, 0);
+                        break;
+                }
+            }
+        });
     }
 }
