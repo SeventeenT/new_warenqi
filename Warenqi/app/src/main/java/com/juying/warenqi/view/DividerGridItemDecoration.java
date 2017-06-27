@@ -1,4 +1,4 @@
-package com.juying.warenqi.app;
+package com.juying.warenqi.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,8 +14,9 @@ import android.view.View;
 import com.juying.warenqi.R;
 
 /**
- * @author zhy
+ * Created by Administrator on 2017/2/7.
  */
+
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
@@ -23,18 +24,14 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 
     public DividerGridItemDecoration(Context context) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
-
         mDivider = ContextCompat.getDrawable(context, R.drawable.shape_rv_divider);
-        //mDivider = a.getDrawable(0);
         a.recycle();
     }
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-
         drawHorizontal(c, parent);
         drawVertical(c, parent);
-
     }
 
     private int getSpanCount(RecyclerView parent) {
@@ -84,8 +81,8 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    private boolean isLastColum(RecyclerView parent, int pos, int spanCount,
-                                int childCount) {
+    private boolean isLastColumn(RecyclerView parent, int pos, int spanCount,
+                                 int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
@@ -113,16 +110,17 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                               int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            // 如果是最后一行，则不需要绘制底部
-            if (pos + spanCount >= childCount)
+            childCount = childCount - childCount % spanCount;
+            if (pos >= childCount)// 如果是最后一行，则不需要绘制底部
                 return true;
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             int orientation = ((StaggeredGridLayoutManager) layoutManager)
                     .getOrientation();
             // StaggeredGridLayoutManager 且纵向滚动
             if (orientation == StaggeredGridLayoutManager.VERTICAL) {
+                childCount = childCount - childCount % spanCount;
                 // 如果是最后一行，则不需要绘制底部
-                if (pos + spanCount >= childCount)
+                if (pos >= childCount)
                     return true;
             } else
             // StaggeredGridLayoutManager 且横向滚动
@@ -137,19 +135,15 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
+    public void getItemOffsets(Rect outRect, int itemPosition,
+                               RecyclerView parent) {
         int spanCount = getSpanCount(parent);
         int childCount = parent.getAdapter().getItemCount();
-        // 如果是最后一行，则不需要绘制底部
-        if (isLastRaw(parent, itemPosition, spanCount, childCount)) {
-            // 最后一行且为最后一列则不绘制
-            if (isLastColum(parent, itemPosition, spanCount, childCount)) {
-                outRect.set(0, 0, 0, 0);
-            } else {
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
-            }
-        } else if (isLastColum(parent, itemPosition, spanCount, childCount)) {
-            // 如果是最后一列，则不需要绘制右边
+        if (isLastRaw(parent, itemPosition, spanCount, childCount))// 如果是最后一行，则不需要绘制底部
+        {
+            outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+        } else if (isLastColumn(parent, itemPosition, spanCount, childCount))// 如果是最后一列，则不需要绘制右边
+        {
             outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
         } else {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(),

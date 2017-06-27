@@ -30,4 +30,18 @@
     <string name="finished_task_status">已完成</string>
     <string name="canceled_task_status">已取消</string>
     <string name="ask_task">追评&amp;问大家</string>
+    <string name="personal_info">个人资料</string>
+    <string name="taobao_account">淘宝账号</string>
+    <string name="real_name_auth">实名认证</string>
+    <string name="huabei_account_auth">花呗号认证</string>
+    <string name="my_bank_account">我的银行卡</string>
+    <string name="take_settings">接单设置</string>
+    <string name="capital_detail">资金明细</string>
+    <string name="withdraw_gold">金币提现</string>
+    <string name="withdraw_deposit">本金提现</string>
+    <string name="invite_detail">邀请明细</string>
+    <string name="feedback">意见反馈</string>
+    <string name="notices">公告通知</string>
+    <string name="help_center">帮助中心</string>
+    <string name="one_yuan_shop">夺宝游戏</string>
 </resources>

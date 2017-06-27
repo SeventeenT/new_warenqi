@@ -3,14 +3,16 @@ package com.juying.warenqi.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-
-import com.jess.arms.di.scope.ActivityScope;
+import com.juying.warenqi.mvp.contract.AccountInfoContract;
+import com.juying.warenqi.mvp.model.api.service.HomeService;
+import com.juying.warenqi.mvp.model.entity.AccountInfo;
 
 import javax.inject.Inject;
 
-import com.juying.warenqi.mvp.contract.AccountInfoContract;
+import io.reactivex.Observable;
 
 
 @ActivityScope
@@ -32,4 +34,12 @@ public class AccountInfoModel extends BaseModel implements AccountInfoContract.M
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<AccountInfo> getGoldInfo() {
+        return mRepositoryManager
+                .obtainRetrofitService(HomeService.class)
+                .getGoldInfo()
+                .flatMap(accountInfoBaseBean ->
+                        Observable.just(accountInfoBaseBean.getResults()));
+    }
 }

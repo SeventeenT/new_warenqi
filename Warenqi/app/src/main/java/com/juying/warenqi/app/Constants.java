@@ -9,4 +9,6 @@ package com.juying.warenqi.app;
  */
 public interface Constants {
     String ACTIVITY_FRAGMENT_REPLACE = "activity_fragment_replace";
+    int SECTION_HEADER = 1092;
+    int SECTION_CONTENT = 0;
 }

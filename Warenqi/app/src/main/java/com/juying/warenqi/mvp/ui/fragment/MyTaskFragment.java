@@ -18,6 +18,7 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 import com.juying.warenqi.R;
+import com.juying.warenqi.app.Constants;
 import com.juying.warenqi.di.component.DaggerMyTaskComponent;
 import com.juying.warenqi.di.module.MyTaskModule;
 import com.juying.warenqi.mvp.contract.MyTaskContract;
@@ -161,13 +162,12 @@ public class MyTaskFragment extends BaseFragment<MyTaskPresenter> implements MyT
 
             @Override
             public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
-                super.getItemOffsets(outRect, itemPosition, parent);
                 MyTaskStateAdapter parentAdapter = (MyTaskStateAdapter) parent.getAdapter();
                 int itemViewType = parentAdapter.getItemViewType(itemPosition);
                 switch (itemViewType) {
-                    case 1092:
+                    case Constants.SECTION_HEADER:
                         break;
-                    case 0:
+                    case Constants.SECTION_CONTENT:
                         outRect.set(0, 1, 1, 0);
                         break;
                 }
