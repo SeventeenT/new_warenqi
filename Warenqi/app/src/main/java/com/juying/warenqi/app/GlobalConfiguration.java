@@ -330,11 +330,13 @@ public class GlobalConfiguration implements ConfigModule {
         if (e.getCode() == -1) {
             ToastUtils.showShort("测试到");
         } else if (e.getCode() == 561) {
-            ToastUtils.showShort("请重新登录");
-            SPUtils.getInstance().put("isLogin", false);
             AppManager appManager = ((BaseApplication) context1).getAppComponent().appManager();
-            appManager.killAll();
-            appManager.startActivity(LoginActivity.class);
+            if (!(appManager.getCurrentActivity() instanceof LoginActivity)) {
+                appManager.killAll();
+                ToastUtils.showShort("请重新登录");
+                SPUtils.getInstance().put("isLogin", false);
+                appManager.startActivity(LoginActivity.class);
+            }
         }
         return e.getMessage();
     }
