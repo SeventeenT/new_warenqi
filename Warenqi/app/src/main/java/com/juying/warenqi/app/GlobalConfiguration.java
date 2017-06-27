@@ -333,7 +333,7 @@ public class GlobalConfiguration implements ConfigModule {
             AppManager appManager = ((BaseApplication) context1).getAppComponent().appManager();
             if (!(appManager.getCurrentActivity() instanceof LoginActivity)) {
                 appManager.killAll();
-                ToastUtils.showShort("请重新登录");
+                UiUtils.snackbarText("请重新登录");
                 SPUtils.getInstance().put("isLogin", false);
                 appManager.startActivity(LoginActivity.class);
             }
